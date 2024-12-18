@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import instLogo from './assets/inst.svg'
-import youtubeLogo from '/youtube.svg'
-import './App.css'
+import React from 'react';
+function App() {
+    return <h1>Hello, Vova!</h1>;
+}
+export default App;
+
+
+//----------------Props
+
+
+/*import React from 'react';
+import Greeting from './Greeting.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-     return (
-    <>
-      <div>
-        <a href="https://www.youtube.com/c/VladimirShaitan" target="_blank">
-          <img src={youtubeLogo} className="logo" alt="YouTube logo" />
-        </a>
-        <a href="https://www.instagram.com/vlad.sha/" target="_blank">
-          <img src={instLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>YouTube + Instagram</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          your click {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return <Greeting name="Vladyslav" />;
 }
 
-export default App
+export default App;*/
+
+
+
+//---------------useState
+
+
+/*import React, { useState } from 'react';
+import Greeting from './Greeting';
+
+function App() {
+  const [name, setName] = useState('Vladyslav');
+
+  return (
+    <div>
+      <Greeting name={name} />
+      <button onClick={() => setName('Vova')}>Change Name</button>
+    </div>
+  );
+}
+
+export default App;*/
+
+
+//--------------List rendering
+
+
+/*import React from 'react';
+
+function App() {
+    const items = ['Apple', 'Banana', 'Orange'];
+
+    return (
+        <ul>
+            {items.map((item, index) => (
+                <li key={index}>{item}</li>
+            ))}
+        </ul>
+    );
+}
+
+export default App;*/
