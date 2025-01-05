@@ -1,59 +1,18 @@
-import React from 'react';
-function App() {
-    return <h1>Hello, Vova!</h1>;
-}
-export default App;
-
-
-//----------------Props
-
-
-/*import React from 'react';
-import Greeting from './Greeting.jsx';
+import Header from "./components/Header.jsx";
+import NavBar from "./components/Sidebar.jsx";
+import MainContent from "./components/MainContainer.jsx";
+import "./App.css";
 
 function App() {
-    return <Greeting name="Vladyslav" />;
-}
-
-export default App;*/
-
-
-
-//---------------useState
-
-
-/*import React, { useState } from 'react';
-import Greeting from './Greeting';
-
-function App() {
-  const [name, setName] = useState('Vladyslav');
-
-  return (
-    <div>
-      <Greeting name={name} />
-      <button onClick={() => setName('Vova')}>Change Name</button>
-    </div>
-  );
-}
-
-export default App;*/
-
-
-//--------------List rendering
-
-
-/*import React from 'react';
-
-function App() {
-    const items = ['Apple', 'Banana', 'Orange'];
-
     return (
-        <ul>
-            {items.map((item, index) => (
-                <li key={index}>{item}</li>
-            ))}
-        </ul>
+        <div className="App">
+            <Header />
+            <main>
+                <NavBar />
+                <MainContent />
+            </main>
+        </div>
     );
 }
 
-export default App;*/
+export default App;
