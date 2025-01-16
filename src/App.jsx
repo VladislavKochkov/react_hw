@@ -1,63 +1,49 @@
-import SmilesList from "./components/SmilesList.jsx";
-import ShowResults from "./components/Result.jsx";
-import React from "react";
+import React, { useState } from "react";
+import './index.css';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            emojis: [
-                { id: 1, symbol: "😎", votes: 0 },
-                { id: 2, symbol: "🥱", votes: 0 },
-                { id: 3, symbol: "😉", votes: 0 },
-                { id: 4, symbol: "🤩", votes: 0 },
-                { id: 5, symbol: "🤬", votes: 0 },
-            ],
-            winner: null,
-        };
+function App() {
+    const [tasks, setTasks] = useState([]);
+    const [newTask, setNewTask] = useState("");
 
-        this.handleVote = this.handleVote.bind(this);
-        this.showResults = this.showResults.bind(this);
-    }
-
-    handleVote(id) {
-        const updatedEmojis = this.state.emojis.map((emoji) => {
-            if (emoji.id === id) {
-                return { ...emoji, votes: emoji.votes + 1 };
-            }
-            return emoji;
-        });
-
-        this.setState({ emojis: updatedEmojis });
-    }
-
-    showResults() {
-        const allVotesZero = this.state.emojis.every((emoji) => emoji.votes === 0);
-
-        if (allVotesZero) {
-            this.setState({ winner: null });
-            return;
+    const addTask = () => {
+        if (newTask) {
+            setTasks([...tasks, { text: newTask, completed: false }]);
+            setNewTask("");
         }
+    };
+    const deleteTask = (index) => {
+        setTasks(tasks.filter((_, i) => i !== index));
+    };
 
-        const winnerEmoji = this.state.emojis.reduce((prev, current) => {
-            return prev.votes > current.votes ? prev : current;
-        });
-
-        this.setState({ winner: winnerEmoji });
-    }
-
-    render() {
-        return (
-            <div className="container text-center mt-4">
-                <h1 className="mb-4">Voting</h1>
-                <SmilesList emojis={this.state.emojis} onVote={this.handleVote} />
-                <button className="btn btn-primary mt-4" onClick={this.showResults}>
-                    Show Results
-                </button>
-                {this.state.winner && <ShowResults winner={this.state.winner} />}
-            </div>
+    const toggleCompletion = (index) => {
+        setTasks(
+            tasks.map((task, i) =>
+                i === index ? { ...task, completed: !task.completed } : task
+            )
         );
-    }
+    };
+
+    return (
+        <div className="App">
+            <h1>To-Do List</h1>
+            <input
+                type="text"
+                value={newTask}
+                onChange={(e) => setNewTask(e.target.value)}
+                placeholder="Add a new task"
+            />
+            <button onClick={addTask}>Add a task</button>
+
+            <ul>
+                {tasks.map((task, index) => (
+                    <li key={index} style={{ textDecoration: task.completed ? "line-through" : "none" }}>
+                        <span onClick={() => toggleCompletion(index)}>{task.text}</span>
+                        <button onClick={() => deleteTask(index)}>Delete</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 }
 
 export default App;
